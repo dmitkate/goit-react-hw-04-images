@@ -1,0 +1,19 @@
+.searchbar{
+    background-color: rgb(11, 91, 152);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.input{
+    padding: 10px 30px;
+    width: 360px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+.button{
+    position: absolute;
+    top: 15px;
+    background-color: transparent;
+    border: 1px solid transparent;
+}
