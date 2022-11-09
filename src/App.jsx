@@ -14,6 +14,9 @@ export const App = () => {
   const [totalHits, setTotalHits] = useState(0);
 
   useEffect(() => {
+    if (name.trim() === '') {
+      return;
+    }
     FetchAPI(name, page).then(response => {
       const { hits, totalHits } = response;
       if (hits.length === 0) {
