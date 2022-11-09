@@ -1,37 +1,25 @@
 import css from './gallery.module.css';
-import { Component } from 'react';
+import { useState } from 'react';
 import { Modal } from 'components/modal/modal';
-export class ImageGalleryItem extends Component {
-  state = {
-    showModal: false,
+
+export const ImageGalleryItem = ({ gallerys }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleModal = () => {
+    setIsOpen(prevState => {
+      setIsOpen(!prevState);
+    });
   };
-  toggleModal = () => {
-    this.setState(({ showModal }) => ({
-      showModal: !showModal,
-    }));
-  };
-  render() {
-    const { gallerys } = this.props;
-    const { showModal } = this.state;
-    return (
-      <li key={gallerys.id} className={css.galleryList}>
-        <img
-          className={css.galleryListimg}
-          src={gallerys.webformatURL}
-          alt={gallerys.tags}
-          onClick={this.toggleModal}
-        />
-        {showModal && (
-          <Modal forModal={gallerys} onToggle={this.toggleModal}>
-            <img
-              src={gallerys.largeImageURL}
-              alt={gallerys.tags}
-              width={740}
-              height={480}
-            />
-          </Modal>
-        )}
-      </li>
-    );
-  }
-}
+  const { id, webformatURL, tags } = gallerys;
+
+  return (
+    <li key={id} className={css.galleryList}>
+      <img
+        className={css.galleryListimg}
+        src={webformatURL}
+        alt={tags}
+        onClick={toggleModal}
+      />
+      {isOpen && <Modal item={gallerys} close={toggleModal}></Modal>}
+    </li>
+  );
+};
